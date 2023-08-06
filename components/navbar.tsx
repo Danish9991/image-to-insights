@@ -25,7 +25,6 @@ const NAV_ITEMS: Array<NavItem> = [
 export default function Navbar() {
     const router = useRouter();
     const { setTheme, theme } = useTheme()
-   // const [theme, setTheme] = useState('light');
    const [navbar, setNavbar] = useState(false)
    const [mount, setMount] = useState(false)
    const toggleTheme = () => {
@@ -52,7 +51,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
             <Link href="home">
               <div className="container flex items-center space-x-2">
-                <h2 className="text-2xl font-bold">Image To Insight</h2>
+                <h2 style={{fontFamily: "cursive"}} className="text-4xl font-bold">Insights</h2>
               </div>
             </Link>
           </div>

@@ -28,6 +28,7 @@ import { SkeletonProvider } from '@/providers/skelton-provider';
 import { ImageDataProps, DetectionProps } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
+import ShelfAnalysisChart from '@/components/shelf-analysis-chart';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,10 +37,10 @@ export default function Home() {
   const [tableData, setTableData] = useState<any>(null)
   const [brandChartData, setBrandChartData] = useState<any>(null)
   const [isLoading, setIsLoading] = useState(false);
-  const [position, setPosition] = useState("desc")
+  const [position, setPosition] = useState("asc")
 
   useEffect(() => {
-    fetchData('desc');
+    fetchData('asc');
   }, []);
 
   const fetchData = async (filter: string) => {
@@ -132,6 +133,7 @@ export default function Home() {
 
                 <DataTableDemo columns={columns} data={tableData?.data} />
                 <div className='mx-auto'>
+                <ShelfAnalysisChart shelfAnalysisData={tableData?.data} />
                   <Image src={imageData?.imagePath || ''} alt='image' width={250} height={250} className='h-[250px] rounded-lg cursor-pointer' />
                   <div style={{ maxWidth: '400px', height: '200px' }} className='mt-4'>
                     <BrandShareDoughnutChart data={brandChartData?.chartData} brandShareData={brandChartData?.brandShareData} />
@@ -139,7 +141,6 @@ export default function Home() {
                 </div>
 
               </div>
-              <div>{imageData?.imagePath}</div>
             </Modal>
           )}
           <div className="flex justify-between">
