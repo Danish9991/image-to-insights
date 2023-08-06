@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Image {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  imagePath String
+  detections ImgDetection[]
+  createdAt DateTime @default(now())
+}
+
+
+model ImgDetection {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  imageUUID String
+  upc String
+  x String
+  y String
+  brandName String
+  width String
+  height String
+  shelfLevel String
+  productName String
+  createdAt DateTime @default(now())
+  imageId String @db.ObjectId
+  image Image   @relation(fields: [imageId], references: [id], onDelete: Cascade)
+}
