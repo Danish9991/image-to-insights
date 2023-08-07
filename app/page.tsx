@@ -5,7 +5,8 @@ import axios from 'axios';
 import Image from 'next/image'
 import { Modal } from '@/components/ui/modal';
 import { DataTableDemo } from '@/components/data-table';
-import { useFilteredData } from '@/hooks/useFilteredData';
+import { setFilteredData } from '@/lib/setFilteredData';
+import { calculateBrandShare } from '@/lib/brandShareData';
 import { columns } from './column';
 import { Chart, registerables } from 'chart.js';
 import { DoughnutController } from 'chart.js';
@@ -22,7 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 Chart.register(...registerables, DoughnutController, ArcElement);
-import { useCalculateBrandShare } from '@/hooks/useBrandShareData';
+
 import BrandShareDoughnutChart from '@/components/donut-chart';
 import { SkeletonProvider } from '@/providers/skelton-provider';
 import { ImageDataProps, DetectionProps } from '@/types';
@@ -60,17 +61,17 @@ export default function Home() {
 
   const handleOpenModal = (data: any) => {
     setImageData(data);
-    const filteredData: any[] = useFilteredData(data?.detections);
-    const brandShareData = useCalculateBrandShare(filteredData)
+    const filteredData: any[] = setFilteredData(data?.detections);
+    const brandShareData = calculateBrandShare(filteredData)
 
     setTableData({ isValue: true, data: filteredData })
     console.log('filteredData =>', filteredData);
     setIsModalOpen(true);
     const chartData = {
-      labels: brandShareData.map((brand) => brand.brandName),
+      labels: brandShareData.map((brand:any) => brand.brandName),
       datasets: [
         {
-          data: brandShareData.map((brand) => brand.share),
+          data: brandShareData.map((brand :any) => brand.share),
           backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#A7A7A7'], // Add more colors if needed
           hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#A7A7A7'], // Add more colors if needed
         },

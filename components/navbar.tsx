@@ -35,7 +35,7 @@ export default function Navbar() {
     if(!mount){
       setMount(true)
     }
-  },[])
+  },[mount])
 
   if(!mount){
     return null

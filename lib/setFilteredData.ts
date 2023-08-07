@@ -6,7 +6,7 @@ interface Product {
   numFacings?: number;
 }
 
-export const useFilteredData = (products: Product[]): Product[] => {
+export const setFilteredData = (products: Product[]): Product[] => {
   const distinctBrands: Product[] = products.reduce(
     (acc: Product[], product: Product) => {
       const existingBrandIndex = acc.findIndex(

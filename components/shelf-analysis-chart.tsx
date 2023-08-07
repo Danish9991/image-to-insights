@@ -9,17 +9,18 @@ const ShelfAnalysisChart: React.FC<{ shelfAnalysisData: ShelfAnalysisData[] }> =
 
   const distinctBrands = [...new Set(shelfAnalysisData.map((item) => item.brandName))];
 
-  const calculateShelfLevelPercentage = (brandName: string, shelfLevel: string): number => {
-    const brandFacings = shelfAnalysisData.filter((item) => item.brandName === brandName);
-    const totalFacings = brandFacings.reduce((total, item) => total + item.numFacings, 0);
-    const shelfLevelFacings = brandFacings.filter((item) => item.shelfLevel === shelfLevel).reduce((total, item) => total + item.numFacings, 0);
 
-    console.log(`Brand: ${brandName}, Shelf Level: ${shelfLevel}, Total Facings: ${totalFacings}, Shelf Level Facings: ${shelfLevelFacings}`);
-
-    return (shelfLevelFacings / totalFacings) * 100;
-  };
 
   useEffect(() => {
+    const calculateShelfLevelPercentage = (brandName: string, shelfLevel: string): number => {
+      const brandFacings = shelfAnalysisData.filter((item) => item.brandName === brandName);
+      const totalFacings = brandFacings.reduce((total, item) => total + item.numFacings, 0);
+      const shelfLevelFacings = brandFacings.filter((item) => item.shelfLevel === shelfLevel).reduce((total, item) => total + item.numFacings, 0);
+  
+      console.log(`Brand: ${brandName}, Shelf Level: ${shelfLevel}, Total Facings: ${totalFacings}, Shelf Level Facings: ${shelfLevelFacings}`);
+  
+      return (shelfLevelFacings / totalFacings) * 100;
+    };
     if (selectedBrand) {
       const topPercentage = calculateShelfLevelPercentage(selectedBrand, 'Top');
       const middlePercentage = calculateShelfLevelPercentage(selectedBrand, 'Middle');
@@ -30,7 +31,7 @@ const ShelfAnalysisChart: React.FC<{ shelfAnalysisData: ShelfAnalysisData[] }> =
         { shelfLevel: 'BOTTOM', percentage: Math.round(bottomPercentage) },
       ]);
     }
-  }, [selectedBrand]);
+  }, [selectedBrand, shelfAnalysisData]);
 
   return (
     <div>

@@ -4,7 +4,7 @@ interface Product {
   numFacings?: number;
 }
 
-export const useCalculateBrandShare = (products: Product[]) => {
+export const calculateBrandShare = (products: Product[]) => {
   const brandCounts: { [key: string]: number } = {};
   let totalFacings = 0;
 

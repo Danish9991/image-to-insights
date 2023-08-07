@@ -26,183 +26,43 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { useFilteredData } from "@/hooks/useFilteredData"
-
-// const data: Payment[] = [
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "m5gr84i9",
-//     amount: 316,
-//     status: "success",
-//     email: "ken99@yahoo.com",
-//   },
-//   {
-//     id: "3u1reuv4",
-//     amount: 242,
-//     status: "success",
-//     email: "Abe45@gmail.com",
-//   },
-//   {
-//     id: "derv1ws0",
-//     amount: 837,
-//     status: "processing",
-//     email: "Monserrat44@gmail.com",
-//   },
-//   {
-//     id: "5kma53ae",
-//     amount: 874,
-//     status: "success",
-//     email: "Silas22@gmail.com",
-//   },
-//   {
-//     id: "bhqecj4p",
-//     amount: 721,
-//     status: "failed",
-//     email: "carmella@hotmail.com",
-//   },
-// ]
 
 export type Payment = {
-  id : string
+  id: string
   brandName: string
   productName: string
   shelfLevel: string
   upc: string
 }
 interface DetectionProps {
-    brandName : string 
-    createdAt : string
-    height : string
-    id : string
-    imageId :  string
-    imageUUID :  string
-    productName :  string
-    shelfLevel :  string
-    upc :  string
-    width : string
-    x : string
-    y : string
+  brandName: string
+  createdAt: string
+  height: string
+  id: string
+  imageId: string
+  imageUUID: string
+  productName: string
+  shelfLevel: string
+  upc: string
+  width: string
+  x: string
+  y: string
 }
 
 interface MyComponentProps {
-    data1: DetectionProps[];
-  }
+  data1: DetectionProps[];
+}
 
 
-  interface DataTableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[]
-    data: TData[]
-  }
-  
-  
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
+}
 
 
-// export const columns: ColumnDef<Payment>[] = [
-//   {
-//     accessorKey: "upc",
-//     header: "UPC",
-//     cell: ({ row }) => (
-//       <div className="capitalize">{row.getValue("upc")}</div>
-//     ),
-//   },
-//   {
-//     accessorKey: "productName",
-//     header: ({ column }) => {
-//       return (
-//         <Button
-//           variant="ghost"
-//           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-//         >
-//           Product Name
-//           <ArrowUpDown className="ml-2 h-4 w-4" />
-//         </Button>
-//       )
-//     },
-//     cell: ({ row }) => <div className="lowercase">{row.getValue("productName")}</div>,
-//   },
-//   {
-//     accessorKey: "brandName",
-//     header: ({ column }) => { return (
-//         <Button
-//           variant="ghost"
-//           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-//         >
-//           Brand Name
-//           <ArrowUpDown className="ml-2 h-4 w-4" />
-//         </Button>
-//       )},
-//       cell: ({ row }) => <div className="lowercase">{row.getValue("brandName")}</div>,
-//   },
-//   {
-//     accessorKey: "shelfLevel",
-//     header: ({ column }) => { return (
-//         <Button
-//           variant="ghost"
-//           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-//         >
-//           Shelf Level
-//           <ArrowUpDown className="ml-2 h-4 w-4" />
-//         </Button>
-//       )},
-//       cell: ({ row }) => <div className="lowercase">{row.getValue("shelfLevel")}</div>,
-//   },
-// ]
 
-export function DataTableDemo<TData, TValue>({ columns, data,}: DataTableProps<TData, TValue>) {
-   // const keysToExtract: Array<keyof typeof data1[0]> = ['id', 'upc', 'productName', 'brandName', 'shelfLevel'];
-   // const data : Payment[] = useFilteredData(data1, keysToExtract);
-  //  console.log('newArray =>', data);
-    // const [mount, setMount] = React.useState(false)
+export function DataTableDemo<TData, TValue>({ columns, data, }: DataTableProps<TData, TValue>) {
 
-    // React.useEffect(() =>{
-    //     setMount(true)
-    // });
-
-    // if(!mount){
-    //     return null
-    // }
-    
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -253,9 +113,9 @@ export function DataTableDemo<TData, TValue>({ columns, data,}: DataTableProps<T
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}
