@@ -173,14 +173,14 @@ export function DragAndDrop() {
 
         <p className="flex dark:text-black font-semibold">
           <BsFillCloudArrowUpFill size='1.5rem' className="mx-2" />
-          Drop files to Attach or
-          <span
+          Drop files to Attach 
+          {/* <span
             className="font-bold text-blue-600 cursor-pointer"
             onClick={openFileExplorer}
           >
             <u>Select files</u>
-          </span>
-          to browse
+          </span> */}
+          {/* to browse */}
         </p>
 
         <div className="flex flex-col items-center justify-center p-3">
