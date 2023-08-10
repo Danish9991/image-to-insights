@@ -2,10 +2,8 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { Button } from "@/components/ui/button"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { OnActionClickContext } from './page'
-import { useContext } from "react"
+import { ArrowUpDown } from "lucide-react"
+import ActionsCell from "@/components/action-cell"
 export type Payment = {
   id: string
   brandName: string
@@ -84,32 +82,8 @@ export const columns: ColumnDef<Payment>[] = [
   {
     id: "actions",
     enableHiding: false,
-    header: "Actions",
-    cell: ({ row }: any) => {
-      const onActionClick = useContext(OnActionClickContext);
-      const payment = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => { onActionClick(payment.productName) }
-              }
-            >
-              See Products in shelf
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
+    header: "Action",
+    cell: ({ row }: any) => <ActionsCell row={row} />,
   },
 
 ]
