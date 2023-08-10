@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, createContext, useState } from 'react'
 import axios from 'axios';
 import Image from 'next/image'
 import { Modal } from '@/components/ui/modal';
@@ -30,8 +30,11 @@ import { ImageDataProps, DetectionProps } from '@/types';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import ShelfAnalysisChart from '@/components/shelf-analysis-chart';
+import ShelfAnalyzer from '@/components/shelf-image';
 
+const OnActionClickContext = createContext<(productName: string) => void>(() => {});
 export default function Home() {
+  const [selectedProductName, setSelectedProductName] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [data, setData] = useState([]);
   const [imageData, setImageData] = useState<ImageDataProps | null>(null)
@@ -59,8 +62,12 @@ export default function Home() {
     }
   };
 
+  const handleActionClick = (productName: string) => {    
+    setSelectedProductName(productName);
+  };
+
   const handleOpenModal = (data: any) => {
-    setImageData(data);
+    setImageData(data);    
     const filteredData: any[] = setFilteredData(data?.detections);
     const brandShareData = calculateBrandShare(filteredData)
 
@@ -96,6 +103,7 @@ export default function Home() {
   return (
 
     <>
+     <OnActionClickContext.Provider value={handleActionClick}>
       {isLoading ? (
         <div className='flex flex-col mt-[200px] h-full space-y-8 items-center justify-center'>
           {/* <SkeletonProvider /> */}
@@ -133,14 +141,13 @@ export default function Home() {
               <div className="flex  max-w-60rem">
 
                 <DataTableDemo columns={columns} data={tableData?.data} />
-                <div className='mx-auto'>
+                <div className='ml-[60px]'>
                 <ShelfAnalysisChart shelfAnalysisData={tableData?.data} />
-                  <Image src={imageData?.imagePath || ''} alt='image' width={250} height={250} className='h-[250px] rounded-lg cursor-pointer' />
+                <ShelfAnalyzer imageUrl={imageData?.imagePath} detections={imageData?.detections} selectedProduct={selectedProductName || undefined} />
                   <div style={{ maxWidth: '400px', height: '200px' }} className='mt-4'>
                     <BrandShareDoughnutChart data={brandChartData?.chartData} brandShareData={brandChartData?.brandShareData} />
                   </div>
                 </div>
-
               </div>
             </Modal>
           )}
@@ -174,6 +181,9 @@ export default function Home() {
           </div>
         </div>
       )}
+      </OnActionClickContext.Provider>
     </>
   )
 }
+
+export { OnActionClickContext };

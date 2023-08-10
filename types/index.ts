@@ -30,3 +30,14 @@ export interface ImageDataProps {
     shelfLevel: string;
     percentage: number;
   }
+
+  export type ImageUrl = string | undefined;
+
+  export type ShelfDetection = {
+    id: string;
+    x: string;
+    y: string;
+    width: string;
+    height: string;
+    productName : string
+  };

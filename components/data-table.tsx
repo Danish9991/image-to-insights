@@ -13,6 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import { OnActionClickContext } from '../app/page'
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -70,7 +71,7 @@ export function DataTableDemo<TData, TValue>({ columns, data, }: DataTableProps<
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-
+  const onActionClick = React.useContext(OnActionClickContext);
   const table = useReactTable({
     data,
     columns,
@@ -91,13 +92,15 @@ export function DataTableDemo<TData, TValue>({ columns, data, }: DataTableProps<
   })
 
   return (
-    <div className="w-[55%] h-[30rem] overflow-y-auto">
+    <div className="w-[47%] h-[30rem] overflow-y-auto">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter productName..."
           value={(table.getColumn("productName")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
+          onChange={(event) => {
             table.getColumn("productName")?.setFilterValue(event.target.value)
+            onActionClick(event.target.value)
+          }
           }
           className="max-w-sm"
         />
