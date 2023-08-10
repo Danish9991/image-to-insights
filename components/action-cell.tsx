@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { OnActionClickContext } from '../app/page';
+
 import { Button } from "./ui/button";
 import { MoreHorizontal } from "lucide-react";
+import { OnActionClickContext } from "@/app/context";
 
 interface ActionsCellProps {
   row: any; // Replace with the correct type for your row data

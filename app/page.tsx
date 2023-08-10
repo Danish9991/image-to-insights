@@ -31,8 +31,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import ShelfAnalysisChart from '@/components/shelf-analysis-chart';
 import ShelfAnalyzer from '@/components/shelf-image';
+import { OnActionClickContext } from './context'; 
 
-const OnActionClickContext = createContext<(productName: string) => void>(() => {});
 export default function Home() {
   const [selectedProductName, setSelectedProductName] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -185,5 +185,3 @@ export default function Home() {
     </>
   )
 }
-
-export { OnActionClickContext };

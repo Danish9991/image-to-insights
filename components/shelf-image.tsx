@@ -53,7 +53,6 @@ const ShelfAnalyzer: React.FC<ShelfAnalyzerProps> = ({ imageUrl, detections, sel
         <div className="shelf-analyzer">
             <div className="shelf-image-container relative">
                 <img src={imageUrl} alt="Shelf" onLoad={handleImageLoad} width="300px" height="300px" className="max-w-[300px] max-h-[300px] border rounded-lg" style={{ height: "300px", width: "300px" }} />
-                <p>Original Image Size: {imageSize.width} x {imageSize.height}</p>
                 {
                     detections?.map((detection, index) => (
                         <div
