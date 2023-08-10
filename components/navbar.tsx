@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { useTheme } from "next-themes"
+import { IoMdMenu, IoMdClose } from "react-icons/io"
 
 interface NavItem {
   label: string
@@ -54,6 +55,14 @@ export default function Navbar() {
                 <h2 style={{fontFamily: "cursive"}} className="text-4xl font-bold">Insights</h2>
               </div>
             </Link>
+            <div className="md:hidden">
+              <button
+                className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                onClick={() => setNavbar(!navbar)}
+              >
+                {navbar ? <IoMdClose size={30} /> : <IoMdMenu size={30} />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -72,7 +81,10 @@ export default function Navbar() {
                     className={
                       "block cursor-pointer lg:inline-block text-neutral-900  hover:text-neutral-500 dark:text-white"
                     }
-                    onClick={() =>router.push(item.page)}
+                    onClick={() =>{
+                      setNavbar(!navbar)
+                      router.push(item.page)
+                    }}
                   >
                     {item.label}
                   </a>
