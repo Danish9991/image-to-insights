@@ -2,7 +2,6 @@ import { ShelfAnalysisData, ShelfLevelsData } from '@/types';
 import React, { useState, useEffect } from 'react';
 
 const ShelfAnalysisChart: React.FC<{ shelfAnalysisData: ShelfAnalysisData[] }> = ({ shelfAnalysisData }) => {
-  console.log('shelfAnalysisData =>', shelfAnalysisData);
   
   const [selectedBrand, setSelectedBrand] = useState<string>('');
   const [shelfLevelsData, setShelfLevelsData] = useState<ShelfLevelsData[]>([]);
@@ -17,7 +16,6 @@ const ShelfAnalysisChart: React.FC<{ shelfAnalysisData: ShelfAnalysisData[] }> =
       const totalFacings = brandFacings.reduce((total, item) => total + item.numFacings, 0);
       const shelfLevelFacings = brandFacings.filter((item) => item.shelfLevel === shelfLevel).reduce((total, item) => total + item.numFacings, 0);
   
-      console.log(`Brand: ${brandName}, Shelf Level: ${shelfLevel}, Total Facings: ${totalFacings}, Shelf Level Facings: ${shelfLevelFacings}`);
   
       return (shelfLevelFacings / totalFacings) * 100;
     };

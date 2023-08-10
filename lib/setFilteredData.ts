@@ -31,6 +31,5 @@ export const setFilteredData = (products: Product[]): Product[] => {
     },
     []
   );
-  console.log("distinctBrands ====>", distinctBrands);
   return distinctBrands;
 };

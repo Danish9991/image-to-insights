@@ -50,7 +50,6 @@ export async function POST(request: NextRequest) {
         detections: true,
       },
     });
-    console.log("img data ===>", img);
   } catch (error) {
     console.log(error);
   }

@@ -54,7 +54,6 @@ export default function Home() {
     try {
       setIsLoading(true)
       const response = await axios.get(`/api/upload`, { params: { sortBy: filter } });
-      console.log('response.data =>', response.data);
       setIsLoading(false)
       setData(response.data);
     } catch (error) {
@@ -72,7 +71,6 @@ export default function Home() {
     const brandShareData = calculateBrandShare(filteredData)
 
     setTableData({ isValue: true, data: filteredData })
-    console.log('filteredData =>', filteredData);
     setIsModalOpen(true);
     const chartData = {
       labels: brandShareData.map((brand:any) => brand.brandName),
@@ -85,8 +83,6 @@ export default function Home() {
       ],
     };
 
-    console.log('chartData => ', chartData);
-
     setBrandChartData({ brandShareData, chartData })
 
   };
@@ -95,7 +91,6 @@ export default function Home() {
   };
 
   const handleFilter = (filter: string) => {
-    console.log(filter);
     setPosition(filter)
     fetchData(filter);
   }

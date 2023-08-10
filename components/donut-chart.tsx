@@ -20,8 +20,6 @@ interface BrandShareDoughnutChartProps {
 }
 
 const BrandShareDoughnutChart: React.FC<BrandShareDoughnutChartProps> = ({ data, brandShareData }) => {
-  console.log('data ====>', data);
-  console.log('brandShareData ====>', brandShareData);
 
   
   const chartOptions : any= {

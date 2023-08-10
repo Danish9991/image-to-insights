@@ -22,13 +22,11 @@ export function DragAndDrop() {
     let txtFile = null;
 
     for (const file of files) {
-      console.log('file', file.type);
 
       if (allowedTypes.includes(file.type)) {
         if (file.type.startsWith('image/')) {
           imgFile = file;
         } else if (file.type === 'text/plain') {
-          console.log('inside');
           txtFile = file;
         }
       }
@@ -49,7 +47,6 @@ export function DragAndDrop() {
 
     if (files.length < 2) {
       if (e.target.files && e.target.files[0]) {
-        console.log(e.target.files);
 
         for (let i = 0; i < e.target.files["length"]; i++) {
           setFiles((prevState: any) => [...prevState, e.target.files[i]]);
